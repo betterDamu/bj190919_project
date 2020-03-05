@@ -12,7 +12,7 @@ module.exports={
         //before就是一个配置 就是用来做mock的
         //before就是一个函数 在我们执行npm run serve的时候 这个函数会被自动调用
         //然后函数中的代码就会被执行 一旦执行了代码 代码中的三个后台路由就会被注册
-        before(app){
+        /*before(app){
             //app 相当于我们express的app对象
             app.get("/api/sellers",(req,res)=>{
                 res.json({
@@ -32,6 +32,6 @@ module.exports={
                     data:data.ratings
                 })
             });
-        }
+        }*/
     }
 }
