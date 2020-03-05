@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    app
+    <ele-header></ele-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import header from "components/ele-header.vue";
+  export default {
+    name: 'App',
+    components:{
+        "ele-header":header
+    }
+  }
 </script>
 
 <style>

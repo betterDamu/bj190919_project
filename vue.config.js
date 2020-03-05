@@ -1,4 +1,9 @@
-const data = require("./data.json")
+const path = require('path');
+const data = require("./data.json");
+//__dirname 当前文件所在的目录 : layout
+function resolve (dir) {
+    return path.join(__dirname, dir)
+}
 module.exports={
     //代码修改之后 vue脚手架才会重新开始编译
     // false: 跳过eslint的检查
@@ -33,5 +38,13 @@ module.exports={
                 })
             });
         }*/
+    },
+    configureWebpack:{
+        resolve: {
+            alias: {
+                'components': resolve('src/components'),
+                'pages': resolve('src/pages'),
+            }
+        }
     }
 }
