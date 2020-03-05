@@ -1,24 +1,9 @@
-# layout
+###day01
+    vue-cli4.0
+    mock数据
 
-## Project setup
-```
-npm install
-```
+    字体图标:
+        优点:不会失帧;可以让我们的网站少发很多http请求
+        缺点:制作成本比较高;色调一般比较单一
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
