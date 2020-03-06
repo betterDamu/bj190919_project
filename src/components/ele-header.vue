@@ -1,6 +1,24 @@
 <template>
-    <div>
-        ele-header
+    <div class="header">
+        <div class="top">
+            <div class="avatar">
+                <img  src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+            </div>
+            <div class="info">
+                <div class="title">
+                    <i class="brand"></i>
+                    <span class="name">嘉禾一品（温都水城）</span>
+                </div>
+                <div class="des">
+                    <span class="desIfo">蜂鸟专送/36分钟送达</span>
+                </div>
+                <div class="support">
+                    <i class="icon"></i>
+                    <span class="text">在线支付满100送店;满200送老板</span>
+                </div>
+            </div>
+        </div>
+        <div class="bulletin"></div>
     </div>
 </template>
 
@@ -10,6 +28,61 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+    @import "../common/stylus/mixin.styl"
+    .header
+        font-size 0
+        background gray
+        .top
+            padding 24px 0 18px 24px
+            .avatar
+                display inline-block
+                vertical-align top
+                width 64px
+                height 64px
+                border-radius 2px
+                overflow hidden
+                margin-right 16px
+                img
+                    width 100%
+                    height 100%
+            .info
+                vertical-align top
+                display inline-block
+                color rgba(255,255,255,1)
+                .title
+                    font-size 16px
+                    margin-top 2px
+                    margin-bottom 8px
+                    .brand
+                        bg-image(brand)
+                        vertical-align top
+                        display inline-block
+                        width 30px
+                        height 18px
+                        background pink
+                        margin-right 3px
+                        background-size 100%
+                    .name
+                        vertical-align top
+                        font-weight 800
+                .des
+                    font-size 12px
+                .support
+                    font-size 10px
+                    margin-top 10px
+                    margin-bottom 2px
+                    .icon
+                        bg-image(decrease_1)
+                        vertical-align top
+                        background-size 100%
+                        display inline-block
+                        width 12px
+                        height 12px
+                        margin-right 4px
+                    .text
+                        vertical-align top
+
+
 
 </style>
