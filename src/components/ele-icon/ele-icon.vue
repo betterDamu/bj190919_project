@@ -8,10 +8,31 @@
         对象
 
         <i class="icon icon-1 decrease"></i>
-        <i class="icon icon-2 guarantee"></i>
-        ....
+        <i class="icon icon-2 guarantee"></i> ....
+
+
+        使用css预处理器!!!  预处理的嵌套一定是可以来代表html的嵌套层级的
+
+        <i class="a"></i>
+        <i class="b"></i>
+        .a
+          ....
+        .b
+          ....
+
+
+        <i class="a b"></i>
+        .a
+          ....
+          &.b
+           ....
    -->
 
+    <!--size:可选值 1 2 3 4  代表不一样尺寸的图标-->
+    <!--type: "decrease","discount","guarantee",
+            "invoice","special"
+            可选值 : 1 2 3 4 5
+    -->
 </template>
 
 <script>

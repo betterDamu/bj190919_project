@@ -13,17 +13,27 @@
                     <span class="desIfo">蜂鸟专送/36分钟送达</span>
                 </div>
                 <div class="support">
-                    <!--size:可选值 1 2 3 4  代表不一样尺寸的图标-->
-                    <!--type: "decrease","discount","guarantee",
-                            "invoice","special"
-                            可选值 : 1 2 3 4 5
-                    -->
                     <ele-icon :size="1" :type="1"></ele-icon>
                     <span class="text">在线支付满100送店;满200送老板</span>
                 </div>
             </div>
+            <div class="btn">
+                <span class="num">5个</span>
+                <i class="icon-keyboard_arrow_right"></i>
+            </div>
         </div>
-        <div class="bulletin"></div>
+        <div class="bulletin">
+            <div class="left">
+                <i class="icon"></i>
+                <span class="text">
+                    是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户”
+                </span>
+            </div>
+            <i class="icon-keyboard_arrow_right right"></i>
+        </div>
+        <div class="bg">
+            <img  src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+        </div>
     </div>
 </template>
 
@@ -40,10 +50,12 @@
 <style scoped lang="stylus">
     @import "../../common/stylus/mixin.styl"
     .header
+        position relative
         font-size 0
-        background gray
+        background rgba(7,17,27,.5)
         .top
             padding 24px 0 18px 24px
+            position relative
             .avatar
                 display inline-block
                 vertical-align top
@@ -85,5 +97,60 @@
                         vertical-align top
 
 
+
+            .btn
+                font-size 10px
+                width 48px
+                height 24px
+                line-height 24px
+                background rgba(0,0,0,.2)
+                border-radius 14px
+                text-align center
+                position absolute
+                right 12px
+                bottom 36px
+                color rgba(255,255,255,1)
+        .bulletin
+            width 100%
+            height 28px
+            line-height 28px
+            color rgba(255,255,255,1)
+            font-size 10px
+            font-weight 200
+            background rgba(7,17,17,.2)
+            position relative
+            .left
+                overflow hidden
+                text-overflow ellipsis
+                white-space nowrap
+                height 100%
+                margin-right 26px
+                .icon
+                    bg-image(bulletin)
+                    background-size 100%
+                    background-repeat no-repeat
+                    display inline-block
+                    width 22px
+                    height 12px
+                    margin-left 12px
+                    margin-right 4px
+                    position relative
+                    top 1px
+            .right
+                position absolute
+                right 10px
+                bottom 8px
+
+        .bg
+            position absolute
+            left 0
+            right  0
+            top 0
+            bottom  0
+            z-index -1
+            filter blur(5px)
+            img
+                width 100%
+                height 100%
 
 </style>
