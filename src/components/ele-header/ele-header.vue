@@ -38,14 +38,20 @@
             <div class="mask_wrap">
                 <div class="mask_main">
                     <!--遮罩层的真正内容-->
+                    <!--设计组件 不光是为了复用;
+                    更多的时候 是为了编码的简洁-->
                     <div class="title">嘉禾一品（温都水城）</div>
                     <div class="stars"></div>
                     <ele-line class="line">
                         <span>优惠信息</span>
                     </ele-line>
+                    <ele-list class="list"></ele-list>
                     <ele-line class="line">
                         <span>商家公告</span>
                     </ele-line>
+                    <p class="bulletin">
+                        是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户
+                    </p>
                 </div>
             </div>
             <div class="mask_footer">
@@ -58,11 +64,13 @@
 <script>
     import icon from "components/ele-icon/ele-icon.vue"
     import line from "components/ele-line/ele-line.vue"
+    import list from "components/ele-list/ele-list.vue"
     export default {
         name: "ele-header",
         components:{
             "ele-icon":icon,
-            "ele-line":line
+            "ele-line":line,
+            "ele-list":list
         }
     }
 </script>
@@ -203,7 +211,20 @@
                     .line
                         width 80%
                         margin 0 auto
+                    .list
+                        width 80%
+                        margin 0 auto
+                        margin-top 24px
+                        margin-bottom 28px
 
+                    .bulletin
+                        width 80%
+                        margin 0 auto
+                        font-size 12px
+                        line-height 24px
+                        color white
+                        font-weight 200
+                        padding 0 12px
             .mask_footer
                 margin-top -96px
                 padding 32px 0
