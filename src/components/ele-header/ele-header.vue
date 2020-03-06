@@ -13,7 +13,7 @@
                     <span class="desIfo">蜂鸟专送/36分钟送达</span>
                 </div>
                 <div class="support">
-                    <i class="icon"></i>
+                    <ele-icon :size="1" :type="1"></ele-icon>
                     <span class="text">在线支付满100送店;满200送老板</span>
                 </div>
             </div>
@@ -23,13 +23,17 @@
 </template>
 
 <script>
+    import icon from "components/ele-icon/ele-icon.vue"
     export default {
-        name: "ele-header"
+        name: "ele-header",
+        components:{
+            "ele-icon":icon
+        }
     }
 </script>
 
 <style scoped lang="stylus">
-    @import "../common/stylus/mixin.styl"
+    @import "../../common/stylus/mixin.styl"
     .header
         font-size 0
         background gray
@@ -72,14 +76,6 @@
                     font-size 10px
                     margin-top 10px
                     margin-bottom 2px
-                    .icon
-                        bg-image(decrease_1)
-                        vertical-align top
-                        background-size 100%
-                        display inline-block
-                        width 12px
-                        height 12px
-                        margin-right 4px
                     .text
                         vertical-align top
 
