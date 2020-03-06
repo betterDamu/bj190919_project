@@ -1,5 +1,17 @@
 <template>
     <i class="icon" :class="[`icon-${size}`,`${typesArr[type-1]}`]"></i>
+
+    <!--
+        class交给vue管理之后 我们可以给class指定的数据类型:
+        字符串
+        数组
+        对象
+
+        <i class="icon icon-1 decrease"></i>
+        <i class="icon icon-2 guarantee"></i>
+        ....
+   -->
+
 </template>
 
 <script>

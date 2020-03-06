@@ -13,6 +13,11 @@
                     <span class="desIfo">蜂鸟专送/36分钟送达</span>
                 </div>
                 <div class="support">
+                    <!--size:可选值 1 2 3 4  代表不一样尺寸的图标-->
+                    <!--type: "decrease","discount","guarantee",
+                            "invoice","special"
+                            可选值 : 1 2 3 4 5
+                    -->
                     <ele-icon :size="1" :type="1"></ele-icon>
                     <span class="text">在线支付满100送店;满200送老板</span>
                 </div>
