@@ -34,15 +34,35 @@
         <div class="bg">
             <img  src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
         </div>
+        <div class="mask">
+            <div class="mask_wrap">
+                <div class="mask_main">
+                    <!--遮罩层的真正内容-->
+                    <div class="title">嘉禾一品（温都水城）</div>
+                    <div class="stars"></div>
+                    <ele-line class="line">
+                        <span>优惠信息</span>
+                    </ele-line>
+                    <ele-line class="line">
+                        <span>商家公告</span>
+                    </ele-line>
+                </div>
+            </div>
+            <div class="mask_footer">
+                <i class="icon-close close"></i>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     import icon from "components/ele-icon/ele-icon.vue"
+    import line from "components/ele-line/ele-line.vue"
     export default {
         name: "ele-header",
         components:{
-            "ele-icon":icon
+            "ele-icon":icon,
+            "ele-line":line
         }
     }
 </script>
@@ -53,7 +73,7 @@
         position relative
         font-size 0
         background rgba(7,17,27,.5)
-        .top
+        & > .top
             padding 24px 0 18px 24px
             position relative
             .avatar
@@ -110,7 +130,7 @@
                 right 12px
                 bottom 36px
                 color rgba(255,255,255,1)
-        .bulletin
+        & > .bulletin
             width 100%
             height 28px
             line-height 28px
@@ -141,7 +161,7 @@
                 right 10px
                 bottom 8px
 
-        .bg
+        & > .bg
             position absolute
             left 0
             right  0
@@ -152,5 +172,44 @@
             img
                 width 100%
                 height 100%
+
+        & > .mask
+            position fixed
+            z-index 9
+            left 0
+            right  0
+            top 0
+            bottom  0
+            background rgba(7,17,27,.8)
+            backdrop-filter: blur(5px);
+            overflow-y  auto
+            padding-top 64px
+            .mask_wrap
+                min-height 100%
+                .mask_main
+                    padding-bottom 96px
+                    .title
+                        font-size 16px
+                        font-weight 700px
+                        line-height 16px
+                        color rgba(255,255,255,1)
+                        text-align center
+                    .stars
+                        width 100%
+                        height 24px
+                        background pink
+                        margin-top 16px
+                        margin-bottom 28px
+                    .line
+                        width 80%
+                        margin 0 auto
+
+            .mask_footer
+                margin-top -96px
+                padding 32px 0
+                text-align center
+                .close
+                    font-size 32px
+                    color rgba(255,255,255,1)
 
 </style>
