@@ -34,11 +34,23 @@
       npm install stylus stylus-loader -D
 -->
 <style scoped lang="stylus">
+  @import "./common/stylus/mixin.styl"
   #app
     .navs
+      one-px(rgba(7,17,27,.1))
       display flex
-      background pink
+      height 40px
       .item
         flex 1
         text-align center
+        height 40px
+        line-height 40px
+        a
+          display inline-block
+          width 100%
+          height 100%
+          font-size 14px
+          color rgb(77,85,93)
+          &.active
+            color rgb(240,20,20)
 </style>
