@@ -41,7 +41,9 @@
                     <!--设计组件 不光是为了复用;
                     更多的时候 是为了编码的简洁-->
                     <div class="title">嘉禾一品（温都水城）</div>
-                    <div class="stars"></div>
+                    <div class="starsWrap">
+                        <ele-stars :size="36"></ele-stars>
+                    </div>
                     <ele-line class="line">
                         <span>优惠信息</span>
                     </ele-line>
@@ -65,12 +67,14 @@
     import icon from "components/ele-icon/ele-icon.vue"
     import line from "components/ele-line/ele-line.vue"
     import list from "components/ele-list/ele-list.vue"
+    import stars from "components/ele-stars/ele-stars.vue"
     export default {
         name: "ele-header",
         components:{
             "ele-icon":icon,
             "ele-line":line,
-            "ele-list":list
+            "ele-list":list,
+            "ele-stars":stars
         }
     }
 </script>
@@ -202,10 +206,8 @@
                         line-height 16px
                         color rgba(255,255,255,1)
                         text-align center
-                    .stars
-                        width 100%
-                        height 24px
-                        background pink
+                    .starsWrap
+                        text-align center
                         margin-top 16px
                         margin-bottom 28px
                     .line
