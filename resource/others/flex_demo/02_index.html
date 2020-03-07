@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+            flex的两组核心概念:
+                容器 项目
+                主轴 侧轴
+            flex的一个注意点
+                项目永远排列在主轴的正方向上
+            flex富余空间管理
+                富余空间管理 不会给项目去分配空间，只是确定富裕空间的位置
+
+           flex的属性
+            容器属性
+               flex-direction : 控制了主轴是哪一根;控制了主轴的方向
+               flex-wrap      : 控制侧轴的方向
+                    nowrap       侧轴不会有元素排列
+                    wrap
+                    wrap-reverse
+               flex-flow:    flex-direction + flex-wrap 简写
+                    flex-flow 是不是决定了主轴是哪一根 主轴的方向
+                    flex-flow 是不是也可以决定了侧轴是哪一根 侧轴的方向
+               justify-content : 主轴的富余空间管理
+               align-items: 侧轴的富余空间管理
+               align-content: 侧轴的富余空间管理
+
+        */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 300px;
+            height: 300px;
+            border: 1px solid;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            /*当前这个wrap就可以称为容器*/
+            /*wrap底下的所有子元素可以称为项目*/
+            display: flex;
+            /*flex-direction:row;
+            flex-wrap:wrap;*/
+            flex-flow: column wrap;
+            justify-content:space-around;
+            /*
+                不管侧轴有没有堆砌都能起作用
+                    align-items在分配富余空间时 是以行(列)为单位
+            */
+            align-items:flex-end;
+            /*
+                优先级比较高;可是只能作用于侧轴上产生堆砌的情况
+                    align-content在分配富余空间时 是以整体为单位
+            */
+            /*align-content:flex-start;*/
+        }
+        #wrap .item{
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            box-sizing: border-box;
+            line-height: 50px;
+            text-align: center;
+            background: pink;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+    </div>
+</body>
+</html>
