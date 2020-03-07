@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 300px;
+            height: 300px;
+            border: 1px solid;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            display: flex;
+        }
+        #wrap .item{
+            height: 50px;
+            width: 50px;
+            border: 1px solid;
+            box-sizing: border-box;
+            line-height: 50px;
+            text-align: center;
+            background: pink;
+
+            flex-shrink: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+    </div>
+
+
+    <!--
+        超出空间: 50*8 - 300 = 100
+        总的flex-shrink : 8
+        每一项减掉的尺寸 : 100/8 = 12.5
+        50 -12.5 = 37.5
+
+
+
+        1.计算收缩因子与基准值乘的总和
+            1*50 * 8 = 400
+   		2.计算收缩因数
+         	收缩因数=（项目的收缩因子*项目基准值）/第一步计算总和
+         	(1 * 50) /  400 = 1/8
+   		3.移除空间的计算
+          	移除空间= 项目收缩因数 x 负溢出的空间
+          	1/8 * -(400 - 300) = -12.5
+
+          	50 -12.5 = 37.5
+    -->
+</body>
+</html>
