@@ -2,27 +2,52 @@
     <!--class : "stars stars-24"-->
     <!--class : "stars stars-36"-->
     <!--class : "stars stars-48"-->
-
     <div class="stars" :class="`stars-${size}`">
         <div class="star" v-for="item in classNames" :class="item"></div>
-
-        <!--<div data-v-4d4ca296="" class="star on"></div>-->
-        <!--<div data-v-4d4ca296="" class="star half"></div>-->
-        <!--<div data-v-4d4ca296="" class="star off"></div>-->
-        <!--<div data-v-4d4ca296="" class="star off"></div>-->
-        <!--<div data-v-4d4ca296="" class="star off"></div>-->
     </div>
 </template>
 
 <script>
+    const ON = "on";
+    const HALF = "half";
+    const OFF = "off";
+    const LENGTH = 5;
     export default {
         name: "ele-stars",
         props:{
-            size:Number
+            size:Number,
+            score:Number
         },
-        data(){
-            return {
-                classNames:["on","half","off","off","off"]
+        computed:{
+            classNames(){
+                //根据分数 去 生成一个 class的数组
+                let arr = [];
+                // 没有满0.5   ---> 给暗星
+                // 满0.5      ---> 给半星
+                // 满1.0      ---> 给全星
+
+                const score = Math.floor(this.score * 2)/2;
+
+                //当前这个分数 需不需要半星
+                const needHalf = (score % 1) === 0 ? false : true;
+                //当前这个分数需要多少满星
+                const fullStar =  Math.floor(score);
+
+                for(let i=0;i<fullStar;i++){
+                    if(arr.length===LENGTH)
+                        break
+                    arr.push(ON)
+                }
+
+                needHalf?arr.push(HALF):"";
+
+                //当前这个分数需要多少个暗星
+                while(arr.length < LENGTH){
+                    arr.push(OFF)
+                }
+
+
+                return arr;
             }
         }
     }

@@ -43,7 +43,7 @@
                         更多的时候 是为了编码的简洁-->
                         <div class="title">{{seller.name}}</div>
                         <div class="starsWrap">
-                            <ele-stars :size="36"></ele-stars>
+                            <ele-stars :size="36" :score="seller.score"></ele-stars>
                         </div>
                         <ele-line class="line">
                             <span>优惠信息</span>
