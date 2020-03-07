@@ -39,4 +39,12 @@
         最佳实践:
             在开发项目时;切记不要让项目超过容器;尽可能的避免使用flex-shrink
 
+### 溢出显示省略号的必要条件
+    包裹容器: 一定得是溢出文本的直接父元素
+    包裹容器的宽度一定要定死;不能靠内容撑开
+    需要给包裹元素加三条样式
+                 overflow hidden
+                 text-overflow ellipsis
+                 white-space nowrap
+
 

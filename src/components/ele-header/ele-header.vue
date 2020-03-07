@@ -113,6 +113,8 @@
             .info
                 vertical-align top
                 display inline-block
+                width 200px
+                overflow hidden
                 color rgba(255,255,255,1)
                 .title
                     font-size 16px
@@ -136,6 +138,9 @@
                     font-size 10px
                     margin-top 10px
                     margin-bottom 2px
+                    overflow hidden
+                    text-overflow ellipsis
+                    white-space nowrap
                     .text
                         vertical-align top
 

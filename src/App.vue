@@ -48,6 +48,9 @@
 <style scoped lang="stylus">
   @import "./common/stylus/mixin.styl"
   #app
+    position relative
+    width 100%
+    height 100%
     .navs
       one-px(rgba(7,17,27,.1))
       display flex
