@@ -1,5 +1,5 @@
 <template>
-    <i class="icon" :class="[`icon-${size}`,`${typesArr[type-1]}`]"></i>
+    <i class="icon" :class="[`icon-${size}`,`${typesArr[type]}`]"></i>
 
     <!--
         class交给vue管理之后 我们可以给class指定的数据类型:

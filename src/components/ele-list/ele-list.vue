@@ -1,25 +1,9 @@
 <template>
     <div class="list">
         <ul>
-            <li>
-                <ele-icon :size="2" :type="1" class="icon"></ele-icon>
-                <span class="text">新用户下单立减17元(不与其它活动同享)</span>
-            </li>
-            <li>
-                <ele-icon :size="2" :type="2" class="icon"></ele-icon>
-                <span class="text">满35减19，满65减3</span>
-            </li>
-            <li>
-                <ele-icon :size="2" :type="3" class="icon"></ele-icon>
-                <span class="text">欢乐小食餐【立减19.5元】</span>
-            </li>
-            <li>
-                <ele-icon :size="2" :type="4" class="icon"></ele-icon>
-                <span class="text">火烤菠萝皇堡双人餐【立减29元】</span>
-            </li>
-            <li>
-                <ele-icon :size="2" :type="5" class="icon"></ele-icon>
-                <span class="text">半价单人餐【立减19.8】</span>
+            <li v-for="item in supports">
+                <ele-icon :size="2" :type="item.type" class="icon"></ele-icon>
+                <span class="text">{{item.content}}</span>
             </li>
         </ul>
     </div>
@@ -29,6 +13,9 @@
     import icon from "components/ele-icon/ele-icon.vue"
     export default {
         name: "ele-list",
+        props:{
+            supports:Array
+        },
         components:{
             "ele-icon":icon
         }

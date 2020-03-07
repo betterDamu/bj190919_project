@@ -2,64 +2,66 @@
     <div class="header">
         <div class="top">
             <div class="avatar">
-                <img  src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+                <img  :src="seller.avatar" >
             </div>
             <div class="info">
                 <div class="title">
                     <i class="brand"></i>
-                    <span class="name">嘉禾一品（温都水城）</span>
+                    <span class="name">{{seller.name}}</span>
                 </div>
                 <div class="des">
-                    <span class="desIfo">蜂鸟专送/36分钟送达</span>
+                    <span class="desIfo">{{seller.description}}/{{seller.deliveryTime}}分钟送达</span>
                 </div>
-                <div class="support">
-                    <ele-icon :size="1" :type="1"></ele-icon>
-                    <span class="text">在线支付满100送店;满200送老板</span>
+                <div class="support" v-if="seller.supports">
+                    <ele-icon :size="1" :type="seller.supports[0].type"></ele-icon>
+                    <span class="text">{{seller.supports[0].content}}</span>
                 </div>
             </div>
-            <div class="btn">
-                <span class="num">5个</span>
+            <div class="btn" @click="maskShow = true" v-if="seller.supports">
+                <span class="num">{{seller.supports.length}}个</span>
                 <i class="icon-keyboard_arrow_right"></i>
             </div>
         </div>
-        <div class="bulletin">
+        <div class="bulletin" @click="maskShow = true">
             <div class="left">
                 <i class="icon"></i>
                 <span class="text">
-                    是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户”
+                    {{seller.bulletin}}
                 </span>
             </div>
             <i class="icon-keyboard_arrow_right right"></i>
         </div>
         <div class="bg">
-            <img  src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+            <img  :src="seller.bgImg" alt="">
         </div>
-        <div class="mask">
-            <div class="mask_wrap">
-                <div class="mask_main">
-                    <!--遮罩层的真正内容-->
-                    <!--设计组件 不光是为了复用;
-                    更多的时候 是为了编码的简洁-->
-                    <div class="title">嘉禾一品（温都水城）</div>
-                    <div class="starsWrap">
-                        <ele-stars :size="36"></ele-stars>
+        <transition name="mask">
+            <div class="mask" v-show="maskShow">
+                <div class="mask_wrap">
+                    <div class="mask_main">
+                        <!--遮罩层的真正内容-->
+                        <!--设计组件 不光是为了复用;
+                        更多的时候 是为了编码的简洁-->
+                        <div class="title">{{seller.name}}</div>
+                        <div class="starsWrap">
+                            <ele-stars :size="36"></ele-stars>
+                        </div>
+                        <ele-line class="line">
+                            <span>优惠信息</span>
+                        </ele-line>
+                        <ele-list class="list" :supports="seller.supports"></ele-list>
+                        <ele-line class="line">
+                            <span>商家公告</span>
+                        </ele-line>
+                        <p class="bulletin">
+                            {{seller.bulletin}}
+                        </p>
                     </div>
-                    <ele-line class="line">
-                        <span>优惠信息</span>
-                    </ele-line>
-                    <ele-list class="list"></ele-list>
-                    <ele-line class="line">
-                        <span>商家公告</span>
-                    </ele-line>
-                    <p class="bulletin">
-                        是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户
-                    </p>
+                </div>
+                <div class="mask_footer" @click="maskShow = false">
+                    <i class="icon-close close"></i>
                 </div>
             </div>
-            <div class="mask_footer">
-                <i class="icon-close close"></i>
-            </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -70,6 +72,14 @@
     import stars from "components/ele-stars/ele-stars.vue"
     export default {
         name: "ele-header",
+        props:{
+          seller:Object
+        },
+        data(){
+            return {
+                maskShow:false
+            }
+        },
         components:{
             "ele-icon":icon,
             "ele-line":line,
@@ -85,6 +95,7 @@
         position relative
         font-size 0
         background rgba(7,17,27,.5)
+        overflow hidden
         & > .top
             padding 24px 0 18px 24px
             position relative

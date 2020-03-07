@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ele-header></ele-header>
+    <ele-header :seller="seller"></ele-header>
     <div class="navs">
       <div class="item">
         <router-link to="/goods">商品</router-link>
@@ -18,10 +18,22 @@
 
 <script>
   import header from "components/ele-header/ele-header.vue";
+  const OK = 0;
   export default {
     name: 'App',
+    data(){
+       return {
+           seller:{}
+       }
+    } ,
     components:{
         "ele-header":header
+    },
+    async mounted(){
+      const body = await this.axios.get("/api/seller");
+      if(body.errno === OK){
+        this.seller = body.data;
+      }
     }
   }
 </script>
