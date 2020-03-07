@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+            flex的两组核心概念:
+                容器 项目
+                主轴 侧轴
+            flex的一个注意点
+                项目永远排列在主轴的正方向上
+            flex富余空间管理
+                富余空间管理 不会给项目去分配空间，只是确定富裕空间的位置
+
+           flex的属性
+            容器属性
+               flex-direction : 控制了主轴是哪一根;控制了主轴的方向
+                    row : x轴
+                    column : y轴
+                    row-reverse: x轴 反方向
+                    column-reverse: y轴 反方向
+
+               justify-content : 主轴的富余空间管理
+                    flex-start 富余空间在主轴的正方向
+                    flex-end   富余空间在主轴的反方向
+                    center     富余空间平分在项目整体的两边
+                    space-between 富余空间平分在项目之间
+                    space-around  富余空间平分在项目的两边
+
+              align-items: 侧轴的富余空间管理
+                     flex-start 富余空间在侧轴的正方向
+                     flex-end   富余空间在侧轴的反方向
+                     center     富余空间在项目整体的两边
+                     baseline  跟基线有关(放弃   这辈子都不要用！！！！)
+                     stretch   等高布局(项目得没有显示的指定高度  auto)
+
+            项目属性
+        */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 500px;
+            height: 300px;
+            border: 1px solid;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            /*当前这个wrap就可以称为容器*/
+            /*wrap底下的所有子元素可以称为项目*/
+            display: flex;
+            flex-direction:row;
+            justify-content:space-around;
+            align-items:stretch
+        }
+        #wrap .item{
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            box-sizing: border-box;
+            line-height: 50px;
+            text-align: center;
+            background: pink;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+</body>
+</html>
