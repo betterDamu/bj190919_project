@@ -1,0 +1,33 @@
+.clearfix,
+#app,
+#app2,
+#app3,
+#app4,
+#app5 {
+  zoom: 1;
+}
+.clearfix:after,
+#app:after,
+#app2:after,
+#app3:after,
+#app4:after,
+#app5:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#app {
+  border: 1px solid;
+}
+#app2 {
+  border: 1px solid;
+}
+#app3 {
+  border: 1px solid;
+}
+#app4 {
+  border: 1px solid;
+}
+#app5 {
+  border: 1px solid;
+}
