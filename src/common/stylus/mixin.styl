@@ -15,6 +15,12 @@ one-px($color)
     @media screen and (-webkit-device-pixel-ratio:3)
       transform scaleY(.3333333)
 
+border-none()
+  &:after
+    content ""
+    display none
+
+
 bg-image($name)
   @media screen and (-webkit-device-pixel-ratio:2)
     background-image url($name+"@2x.png")
