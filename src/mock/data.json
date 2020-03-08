@@ -72,6 +72,7 @@
   "goods": [
     {
       "name": "优惠",
+      "type":0,
       "icon": "https://fuss10.elemecdn.com/b/91/8cf4f67e0e8223931cd595dc932fepng.png",
       "foods": [
         {
@@ -326,6 +327,7 @@
     },
     {
       "name": "折扣",
+      "type":1,
       "icon": "https://fuss10.elemecdn.com/0/6a/05b267f338acfeb8bd682d16e836dpng.png",
       "foods": [
         {
