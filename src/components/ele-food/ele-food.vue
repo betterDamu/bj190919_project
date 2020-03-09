@@ -19,14 +19,19 @@
                 <span class="oldPrice">{{food.oldPrice}}</span>
             </span>
         </div>
+        <ele-contorl class="contorl"></ele-contorl>
     </div>
 </template>
 
 <script>
+    import contorl from "components/ele-contorl/ele-contorl"
     export default {
         name: "ele-food",
         props:{
             food:Object
+        },
+        components:{
+            "ele-contorl":contorl
         }
     }
 </script>
@@ -74,4 +79,6 @@
                     font-weight 800
                     line-height 24px
                     text-decoration line-through
+        .contorl
+            flex 0 0 0
 </style>
