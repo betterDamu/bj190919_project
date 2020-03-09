@@ -3,9 +3,10 @@
         <!--食物类型的滑屏区域-->
         <div class="typeWrap" ref="typeWrap">
             <!--滑屏元素-->
-            <ul class="typeList">
+            <ul class="typeList" ref="typeList">
                 <li class="typeItem" :class="{active:currentIndex===index}"
-                        v-for="(item,index) in goods" :key="index" >
+                        v-for="(item,index) in goods" :key="index"
+                    @click="handleCForTypeItem(index)" >
                     <ele-icon class="icon"  v-if="item.type >=0"
                               :size="3" :type="item.type"></ele-icon>
                     <span class="text">{{item.name}}</span>
@@ -37,6 +38,13 @@
             配置:probeType:3
         3. 判断一下实时位置 坐落于第一步拿到的数组哪个区间
             这个区间所对应的下标 就是我们滑到了哪一项上!!
+        4. 左侧列表在被选中时;应该要尽可能的顶到头
+            我们对滑屏的初始化是在nextTick中做的
+            那在vue初始化渲染的时候;滑屏是没有被注册的;
+            所以我们一定的判断一下 滑屏是否已经存在
+        5. 点击左侧列表时;右侧列表得主动滑到对应位置上
+            默认情况下 better-scroll是不会派发click事件的
+            配置:click:true
    */
     const OK = 0;
     import icon from "components/ele-icon/ele-icon";
@@ -59,15 +67,37 @@
                     return scrollY >= top && scrollY<tops[index+1]
                 })
 
+                /*左侧列表要尽可能的顶到头
+                对于下一次index的改变 当前这个oldIndex 可以被认为是上一次的index*/
+                if(this.oldIndex !== index){
+                    this.oldIndex = index;
+                    //说明 index产生了改变
+                    let targetLi = this.$refs.typeList.children[index];
+                    this.typeScroll && this.typeScroll.scrollToElement(targetLi,300)
+                }
+
+
                 return index;
             }
         },
         methods:{
+          // 点击左侧列表 右侧自动滑屏
+          handleCForTypeItem(index){
+              const top = this.tops[index];
+              this.foodsScroll.scrollTo(0,-top,300)
+          },
           //初始化滑屏
           _initScroll(){
               //让左侧列表产生滑屏
-              new BScroll(this.$refs.typeWrap)
+              this.typeScroll =new BScroll(this.$refs.typeWrap,{
+                  click:true
+              })
               //让右侧列表产生滑屏
+              /*foodsScroll 不需要在data中注册;
+                    为什么? 因为foodsScroll 它不是一个想要在界面上显示的数据
+                    而且这个foodsScroll 它也不是其他数据所需要的依赖
+                    所以foodsScroll 不需要具备响应式的能力; 即不用在data中注册
+              */
               this.foodsScroll = new BScroll(this.$refs.foodsWrap,{
                   probeType:3
               });
