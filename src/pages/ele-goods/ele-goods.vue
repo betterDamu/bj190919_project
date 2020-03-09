@@ -33,7 +33,8 @@
         1. 定义一个数组存放右侧列表每一项的位置
             注意渲染问题; 需要使用$nextTick这个api
         2. 拿到右侧滑动时的实时位置
-
+            注意better-scroll 默认是不派发scroll钩子的
+            配置:probeType:3
         3. 判断一下实时位置 坐落于第一步拿到的数组哪个区间
             这个区间所对应的下标 就是我们滑到了哪一项上!!
    */
@@ -46,10 +47,20 @@
         data(){
           return {
               goods:[],
-              currentIndex:0,
               tops:[], // 代表存放右侧列表每一项位置的数组
               scrollY:0 // 代表存放右侧列表滑动时的实时位置
           }
+        },
+        computed:{
+            currentIndex(){
+                //根据scrollY 和 tops 来确定currentIndex
+                let {tops,scrollY} = this;
+                let index = tops.findIndex((top,index)=>{
+                    return scrollY >= top && scrollY<tops[index+1]
+                })
+
+                return index;
+            }
         },
         methods:{
           //初始化滑屏
@@ -57,9 +68,12 @@
               //让左侧列表产生滑屏
               new BScroll(this.$refs.typeWrap)
               //让右侧列表产生滑屏
-              this.foodsScroll = new BScroll(this.$refs.foodsWrap);
+              this.foodsScroll = new BScroll(this.$refs.foodsWrap,{
+                  probeType:3
+              });
+              //这个scroll钩子 默认情况下 是不会被执行的
               this.foodsScroll.on("scroll",({x, y})=>{
-                  console.log(y);
+                  this.scrollY = Math.abs(y);
               })
           } ,
           //初始化右侧列表位置信息的方法
