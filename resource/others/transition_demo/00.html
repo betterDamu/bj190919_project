@@ -19,6 +19,12 @@
     </span>
 </body>
 <script>
+    /*
+        1. 不是所有的css属性都可以产生动画
+            可动画的属性:https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+        2. 内联元素没有办法使用动画
+    */
+
     setTimeout(()=>{
         app.style.transform = "translateX(200px)";
     },2000)
