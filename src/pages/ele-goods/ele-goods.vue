@@ -14,7 +14,7 @@
         </div>
         <!--食物列表的滑屏区域-->
         <div class="foodsWrap" ref="foodsWrap">
-            <ul class="foodsList">
+            <ul class="foodsList" ref="foodsList">
                 <li class="foodsItem" v-for="(good,index) in goods" :key="index">
                     <h2 class="title">{{good.name}}</h2>
                     <ul class="foodList">
@@ -29,6 +29,14 @@
 </template>
 
 <script>
+   /* 实现左右侧列表联动的功能:
+        1. 定义一个数组存放右侧列表每一项的位置
+            注意渲染问题; 需要使用$nextTick这个api
+        2. 拿到右侧滑动时的实时位置
+
+        3. 判断一下实时位置 坐落于第一步拿到的数组哪个区间
+            这个区间所对应的下标 就是我们滑到了哪一项上!!
+   */
     const OK = 0;
     import icon from "components/ele-icon/ele-icon";
     import food from "components/ele-food/ele-food"
@@ -38,19 +46,50 @@
         data(){
           return {
               goods:[],
-              currentIndex:0
+              currentIndex:0,
+              tops:[], // 代表存放右侧列表每一项位置的数组
+              scrollY:0 // 代表存放右侧列表滑动时的实时位置
+          }
+        },
+        methods:{
+          //初始化滑屏
+          _initScroll(){
+              //让左侧列表产生滑屏
+              new BScroll(this.$refs.typeWrap)
+              //让右侧列表产生滑屏
+              this.foodsScroll = new BScroll(this.$refs.foodsWrap);
+              this.foodsScroll.on("scroll",({x, y})=>{
+                  console.log(y);
+              })
+          } ,
+          //初始化右侧列表位置信息的方法
+          _initTops(){
+              let foodsItems = this.$refs.foodsList.children;
+              let top = 0;
+              let tops = [top];
+              // 将foodsItem集合 转成 一个数组
+              Array.from(foodsItems).forEach((foodsItem)=>{
+                  top += foodsItem.offsetHeight;
+                  tops.push(top)
+              })
+
+              this.tops = tops;
           }
         },
         async mounted(){
+            // 代表vue渲染的节点 刚刚 被挂载到dom树上!!
+            // 很有可能界面的渲染还没有成功
             const {errno,data:goods} = await this.axios.get("/api/goods");
             if(errno === OK){
                 this.goods = goods
             }
 
-            //让左侧列表产生滑屏
-            new BScroll(this.$refs.typeWrap)
-            //让右侧列表产生滑屏
-            new BScroll(this.$refs.foodsWrap)
+            //获取右侧列表每一项的位置去组装一个数组
+            //将回调延迟到下次 DOM 更新循环之后执行
+            this.$nextTick(()=>{
+                this._initScroll()
+                this._initTops();
+            })
         },
         components:{
             "ele-icon":icon,

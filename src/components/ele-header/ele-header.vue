@@ -5,18 +5,18 @@
                 <img  :src="seller.avatar" >
             </div>
             <div class="info">
-                <div class="title">
-                    <i class="brand"></i>
-                    <span class="name">{{seller.name}}</span>
-                </div>
-                <div class="des">
-                    <span class="desIfo">{{seller.description}}/{{seller.deliveryTime}}分钟送达</span>
-                </div>
-                <div class="support" v-if="seller.supports">
-                    <ele-icon :size="1" :type="seller.supports[0].type"></ele-icon>
-                    <span class="text">{{seller.supports[0].content}}</span>
-                </div>
+            <div class="title">
+                <i class="brand"></i>
+                <span class="name">{{seller.name}}</span>
             </div>
+            <div class="des">
+                <span class="desIfo">{{seller.description}}/{{seller.deliveryTime}}分钟送达</span>
+            </div>
+            <div class="support" v-if="seller.supports">
+                <ele-icon :size="1" :type="seller.supports[0].type"></ele-icon>
+                <span class="text">{{seller.supports[0].content}}</span>
+            </div>
+        </div>
             <div class="btn" @click="maskShow = true" v-if="seller.supports">
                 <span class="num">{{seller.supports.length}}个</span>
                 <i class="icon-keyboard_arrow_right"></i>
@@ -113,9 +113,10 @@
             .info
                 vertical-align top
                 display inline-block
-                width 200px
                 overflow hidden
                 color rgba(255,255,255,1)
+                @media screen and (max-width 325px)
+                    width 200px
                 .title
                     font-size 16px
                     margin-top 2px
@@ -138,9 +139,10 @@
                     font-size 10px
                     margin-top 10px
                     margin-bottom 2px
-                    overflow hidden
-                    text-overflow ellipsis
-                    white-space nowrap
+                    @media screen and (max-width 325px)
+                        overflow hidden
+                        text-overflow ellipsis
+                        white-space nowrap
                     .text
                         vertical-align top
 
