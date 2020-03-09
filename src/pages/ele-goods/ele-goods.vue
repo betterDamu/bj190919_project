@@ -99,6 +99,7 @@
                     所以foodsScroll 不需要具备响应式的能力; 即不用在data中注册
               */
               this.foodsScroll = new BScroll(this.$refs.foodsWrap,{
+                  click:true,
                   probeType:3
               });
               //这个scroll钩子 默认情况下 是不会被执行的
@@ -133,6 +134,23 @@
             this.$nextTick(()=>{
                 this._initScroll()
                 this._initTops();
+            })
+
+            //为购物车的添加注册总线
+            this.bus.$on("addCount",(food)=>{
+                //为对应的food添加一个响应式属性:count
+                if(food.count){
+                    food.count++
+                }else {
+                    this.$set(food,"count",1)
+                    //food.count = 1; //这个属性不是响应式的!!!  数据产生改变!! 界面不会更新!!!
+                }
+
+            })
+            this.bus.$on("removeCount",(food)=>{
+                if(food.count > 0 ){
+                    food.count--
+                }
             })
         },
         components:{

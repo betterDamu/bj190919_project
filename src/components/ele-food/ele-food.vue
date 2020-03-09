@@ -19,7 +19,7 @@
                 <span class="oldPrice">{{food.oldPrice}}</span>
             </span>
         </div>
-        <ele-contorl class="contorl"></ele-contorl>
+        <ele-contorl :food="food" class="contorl"></ele-contorl>
     </div>
 </template>
 

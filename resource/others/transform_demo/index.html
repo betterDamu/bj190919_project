@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #app{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background: pink;
+            transition: 2s transform linear;
+        }
+    </style>
+</head>
+<body>
+    <span id="app">
+        app
+    </span>
+</body>
+<script>
+    setTimeout(()=>{
+        app.style.transform = "translateX(200px)";
+    },2000)
+</script>
+</html>
