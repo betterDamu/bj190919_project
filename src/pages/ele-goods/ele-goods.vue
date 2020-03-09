@@ -26,6 +26,9 @@
                 </li>
             </ul>
         </div>
+        <!--购物车区域-->
+        <ele-cart class="cart" :seller="seller"
+                  :selectedFoods="selectedFoods"></ele-cart>
     </div>
 </template>
 
@@ -49,9 +52,13 @@
     const OK = 0;
     import icon from "components/ele-icon/ele-icon";
     import food from "components/ele-food/ele-food"
+    import cart from "components/ele-cart/ele-cart"
     import BScroll from "better-scroll";
     export default {
         name: "ele-goods",
+        props:{
+            seller:Object
+        },
         data(){
           return {
               goods:[],
@@ -60,6 +67,17 @@
           }
         },
         computed:{
+            selectedFoods(){
+              let  selectedFoods =[];
+              this.goods.forEach((good)=>{
+                  good.foods.forEach((food)=>{
+                    if(food.count > 0){
+                        selectedFoods.push(food)
+                    }
+                  })
+              })
+              return selectedFoods;
+            },
             currentIndex(){
                 //根据scrollY 和 tops 来确定currentIndex
                 let {tops,scrollY} = this;
@@ -155,7 +173,8 @@
         },
         components:{
             "ele-icon":icon,
-            "ele-food":food
+            "ele-food":food,
+            "ele-cart":cart
         }
     }
 </script>
@@ -217,4 +236,12 @@
                                 .food
                                     border-none()
 
+        .cart
+            flex 0 0 0;
+            position fixed
+            bottom 0
+            left 0
+            height 46px
+            width 100%
+            background #141d27
 </style>
