@@ -1,35 +1,57 @@
 <template>
-    <div class="cart">
-        <div class="left" style="color: white">
-            <div class="icon">
-                <div class="logo" :class="{active:totalCount >0}">
-                    <i class="icon-shopping_cart"></i>
+    <div>
+        <div class="cart">
+            <div class="left" style="color: white">
+                <div class="icon">
+                    <div class="logo" :class="{active:totalCount >0}">
+                        <i class="icon-shopping_cart"></i>
+                    </div>
+                    <span class="qipao" v-show="totalCount >0">{{totalCount}}</span>
                 </div>
-                <span class="qipao" v-show="totalCount >0">{{totalCount}}</span>
+                <div class="totalPrice" :class="{active:totalPrice >0}">
+                    <span>¥{{totalPrice}}</span>
+                </div>
+                <div class="deliveryPrice">
+                    <span>另需配送费¥{{seller.deliveryPrice}}元</span>
+                </div>
             </div>
-            <div class="totalPrice" :class="{active:totalPrice >0}">
-                <span>¥{{totalPrice}}</span>
+            <div class="right" :class="{active:totalPrice>=seller.minPrice}">
+                <span v-if="rightText">{{rightText}}</span>
             </div>
-            <div class="deliveryPrice">
-                <span>另需配送费¥{{seller.deliveryPrice}}元</span>
+            <div class="balls">
+                <transition v-for="ball in balls"
+                            @before-enter="beforeEnter"
+                            @enter="enter"
+                            @after-enter="afterEnter">
+                    <i class="ball" v-show="ball.show"></i>
+                </transition>
             </div>
         </div>
-        <div class="right" :class="{active:totalPrice>=seller.minPrice}">
-            <span v-if="rightText">{{rightText}}</span>
-        </div>
-        <div class="balls">
-            <transition v-for="ball in balls"
-                    @before-enter="beforeEnter"
-                    @enter="enter"
-                    @after-enter="afterEnter">
-                <i class="ball" v-show="ball.show"></i>
-            </transition>
+        <div class="list">
+            <div class="header">
+                <span class="cartText">购物车</span>
+                <span class="clear">清空</span>
+            </div>
+            <div class="content">
+                <ul>
+                    <li class="item" v-for="selectedFood in selectedFoods">
+                        <span class="left">
+                            {{selectedFood.name}}
+                        </span>
+                        <div class="right">
+                            <span class="price">¥{{selectedFood.price * selectedFood.count}}</span>
+                            <ele-contorl class="contorl" :food="selectedFood"></ele-contorl>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import {transform} from "@/util/transform.js"
+    import contorl from "components/ele-contorl/ele-contorl.vue"
     export default {
         name: "ele-cart",
         props:{
@@ -141,7 +163,10 @@
                 //shift() 方法从数组中删除第一个元素，并返回该元素的值
                 const ball = this.dropBalls.shift()
                 if(ball.show){
+                    //数据驱动  最终小球所对应的i标签在下一次vue渲染的时候会隐藏掉
                     ball.show = false;
+                    //在vue的界面更新之前 我们通过原生api让这个小球所对应的i标签
+                    //快速隐藏掉
                     el.style.display="none";
                 }
             }
@@ -153,12 +178,25 @@
                 this.dropBall(target)
             })
 
+        },
+        components:{
+            "ele-contorl":contorl
         }
     }
 </script>
 
 <style scoped lang="stylus">
+    /*不要在fiexd定位内部再去使用fixed或absoult定位*/
+    @import "../../common/stylus/mixin.styl"
     .cart
+        flex 0 0 0;
+        position fixed
+        z-index 3
+        bottom 0
+        left 0
+        height 46px
+        width 100%
+        background #141d27
         display flex
         .left
             flex 1
@@ -248,4 +286,36 @@
                 transition .3s transform linear
 
 
+    .list
+        max-height 255px
+        position fixed
+        z-index 2
+        left 0
+        bottom 46px
+        width 100%
+        background pink
+        padding-bottom 20px
+        .header
+            one-px(rgba(7,17,27,.1))
+            height 40px
+            background #f3f5f7
+            display flex
+            justify-content space-between
+            align-items center
+            .cartText
+                margin-left 18px ;
+                color rgba(7,17,27,1);
+                font-weight 800
+                font-size 14px
+            .clear
+                margin-right 18px
+                color rgba(0,160,220,1);
+                font-weight 800
+                font-size 14px
+
+        .content
+            .item
+                display flex
+                .right
+                    display flex
 </style>

@@ -81,4 +81,7 @@
                     text-decoration line-through
         .contorl
             flex 0 0 0
+            position absolute
+            bottom 3px
+            right 0
 </style>

@@ -15,7 +15,10 @@
     export default {
         name: "ele-contorl",
         props:{
-            food:Object
+            food:{
+                type:Object,
+                require:true
+            }
         },
         methods:{
             addCount(ev){
@@ -33,9 +36,6 @@
 
 <style scoped lang="stylus">
     .contorl
-        position absolute
-        bottom 3px
-        right 0
         i
             display inline-block
             font-size 24px

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var dropBalls =[];
+    var balls = [{show:false},{show:false}];
+
+
+    balls[0].show=true;
+    dropBalls.push(balls[0]);
+
+
+    const ball = dropBalls.shift()
+    ball.show = false;
+
+    console.log(balls,dropBalls)
+
+
+
+</script>
+</html>

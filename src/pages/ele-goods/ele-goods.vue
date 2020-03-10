@@ -27,7 +27,7 @@
             </ul>
         </div>
         <!--购物车区域-->
-        <ele-cart class="cart" :seller="seller"
+        <ele-cart  :seller="seller"
                   :selectedFoods="selectedFoods"></ele-cart>
     </div>
 </template>
@@ -235,13 +235,4 @@
                             &:last-child
                                 .food
                                     border-none()
-
-        .cart
-            flex 0 0 0;
-            position fixed
-            bottom 0
-            left 0
-            height 46px
-            width 100%
-            background #141d27
 </style>
