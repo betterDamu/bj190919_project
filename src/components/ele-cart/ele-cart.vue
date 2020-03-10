@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="cart">
-            <div class="left" style="color: white">
+            <div @click="flodFn" class="left" style="color: white">
                 <div class="icon">
                     <div class="logo" :class="{active:totalCount >0}">
                         <i class="icon-shopping_cart"></i>
@@ -27,7 +27,7 @@
                 </transition>
             </div>
         </div>
-        <div class="list" v-show="false">
+        <div class="list" v-show="showList">
             <div class="header">
                 <span class="cartText">购物车</span>
                 <span class="clear" @click="clear">清空</span>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
         </div>
-        <div class="mask" v-show="false"></div>
+        <div class="mask" v-show="showList" @click="flod=true"></div>
     </div>
 </template>
 
@@ -68,7 +68,8 @@
                   {show:false,name:4},
                   {show:false,name:5}
               ],
-              dropBalls:[] //存放正在降落的小球!!!!!
+              dropBalls:[], //存放正在降落的小球!!!!!
+              flod:true // 代表list是否需要折叠   list的显示和折叠是相反
           }
         },
         computed:{
@@ -94,6 +95,19 @@
                 }else {
                     return "去结算"
                 }
+            },
+            showList(){
+                //代表控制list的显示与隐藏
+                //1. 购物车中的数量大于0
+                //2. flod要为false
+                //满足 1 和 2 list才能显示
+                if(this.totalCount<=0){
+                    //逻辑一定要填满;当 购物车中的数量小于等于0是;flod一定是true的
+                    //flod代表着折叠
+                    this.flod = true;
+                    return false
+                }
+                return !this.flod
             }
         },
         methods:{
@@ -173,6 +187,12 @@
             },
             clear(){
                 this.$emit("clear")
+            },
+            flodFn(){
+                if(this.totalCount <=0){
+                    return;
+                }
+                this.flod=!this.flod
             }
         },
         mounted(){
@@ -295,7 +315,7 @@
         position fixed
         z-index 2
         left 0
-        bottom -15px
+        bottom 45px
         width 100%
         background #f3f5f1
         padding-bottom 20px
