@@ -27,10 +27,10 @@
                 </transition>
             </div>
         </div>
-        <div class="list">
+        <div class="list" v-show="false">
             <div class="header">
                 <span class="cartText">购物车</span>
-                <span class="clear">清空</span>
+                <span class="clear" @click="clear">清空</span>
             </div>
             <div class="content">
                 <ul>
@@ -46,6 +46,7 @@
                 </ul>
             </div>
         </div>
+        <div class="mask" v-show="false"></div>
     </div>
 </template>
 
@@ -169,6 +170,9 @@
                     //快速隐藏掉
                     el.style.display="none";
                 }
+            },
+            clear(){
+                this.$emit("clear")
             }
         },
         mounted(){
@@ -291,9 +295,9 @@
         position fixed
         z-index 2
         left 0
-        bottom 46px
+        bottom -15px
         width 100%
-        background pink
+        background #f3f5f1
         padding-bottom 20px
         .header
             one-px(rgba(7,17,27,.1))
@@ -315,7 +319,29 @@
 
         .content
             .item
+                one-px(rgba(7,17,27,.1))
                 display flex
+                height 48px
+                align-items center
+                justify-content space-between
+                .left
+                    padding-left 18px
                 .right
                     display flex
+                    align-items center
+                    padding-right  22px
+                    .price
+                        margin-right 12px
+                        color rgba(240,20,20,1)
+                        font-size 10px
+                        font-weight 700
+    .mask
+        position fixed
+        z-index 1
+        left 0
+        right 0
+        top 0
+        bottom 0
+        background rgba(7,17,27,.6)
+        backdrop-filter blur(5px)
 </style>

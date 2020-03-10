@@ -27,7 +27,7 @@
             </ul>
         </div>
         <!--购物车区域-->
-        <ele-cart  :seller="seller"
+        <ele-cart  :seller="seller" @clear="clear"
                   :selectedFoods="selectedFoods"></ele-cart>
     </div>
 </template>
@@ -99,6 +99,12 @@
             }
         },
         methods:{
+          clear(){
+              console.log("clear")
+              this.selectedFoods.forEach((selectedFood)=>{
+                  selectedFood.count = 0;
+              })
+          },
           // 点击左侧列表 右侧自动滑屏
           handleCForTypeItem(index){
               const top = this.tops[index];
