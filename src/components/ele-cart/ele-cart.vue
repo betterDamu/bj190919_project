@@ -29,6 +29,7 @@
 </template>
 
 <script>
+    import {transform} from "@/util/transform.js"
     export default {
         name: "ele-cart",
         props:{
@@ -38,12 +39,13 @@
         data(){
           return {
               balls:[
-                  {show:false},
-                  {show:false},
-                  {show:false},
-                  {show:false},
-                  {show:false}
-              ]
+                  {show:false,name:1},
+                  {show:false,name:2},
+                  {show:false,name:3},
+                  {show:false,name:4},
+                  {show:false,name:5}
+              ],
+              dropBalls:[] //存放正在降落的小球!!!!!
           }
         },
         computed:{
@@ -89,7 +91,8 @@
                         ball.show = true;
                         // 为了待会beforeEnter中可以读到target信息
                         // 函数与函数之间进行数据的传递 大概率下会使用到对象的属性
-                        ball.target = target;
+                        ball.target = target; //真正的dom节点 点击的那个加号按钮
+                        this.dropBalls.push(ball)
                         return;
                     }
                 };
@@ -98,20 +101,50 @@
             //  beforeEnter:动画第一帧
             //  enter:开始动画
             //  afterEnter:动画结束
-            beforeEnter(){
+            //    el: 产生运动的元素
+            beforeEnter(el){
                 //动画第一帧 :  确定最新要运动的小球起始位置
+                //数据类型转换: 4 3 2 1 0
+                //在while循环的()中  js是会做自动的数据类型装换的  将任意出现在()中的数据 ---> 布尔值
+                //  4 3 2 1 --> true
+                //  0 ---> false
                 let count = this.balls.length;
                 while (count--){
                     let ball = this.balls[count];
                     if(ball.show){
                         //当前这个小球 结束即将要产生运动的小球
                         //确定这个小球的初始位置
+                        let viewH = document.documentElement.clientHeight;
+                        let targetRect = ball.target.getBoundingClientRect()
+                        let X = targetRect.left - 28;
+                        let Y = viewH - targetRect.top - 45;
 
+                        transform(el,"translateX",X)
+                        transform(el,"translateY",-Y)
+
+                        break; // 确定最新要运动的小球起始位置
                     }
                 }
             },
-            enter(){console.log("enter")},
-            afterEnter(){console.log("afterEnter")}
+            enter(el){
+                //手动 强制让浏览器渲染一遍
+                //当我们在通过dom api获取元素的尺寸时;浏览器为了让api返回最精确的值;
+                //会强制刷新渲染队列!!!!  浏览器会重新提前渲染!!!
+                let hook = el.offsetHeight;
+                this.$nextTick(()=>{
+                    transform(el,"translateX",0)
+                    transform(el,"translateY",0)
+                })
+            },
+            afterEnter(el){
+                //循环利用这五个小球时  我们优先挑较早动画完的小球!!!
+                //shift() 方法从数组中删除第一个元素，并返回该元素的值
+                const ball = this.dropBalls.shift()
+                if(ball.show){
+                    ball.show = false;
+                    el.style.display="none";
+                }
+            }
         },
         mounted(){
             //唤醒一个小球
@@ -212,7 +245,7 @@
                 height 16px
                 border-radius 50%
                 background deeppink
-                transition 1s transform linear
+                transition .3s transform linear
 
 
 </style>
