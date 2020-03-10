@@ -32,7 +32,7 @@
                 <span class="cartText">购物车</span>
                 <span class="clear" @click="clear">清空</span>
             </div>
-            <div class="content">
+            <div class="content" ref="listContent">
                 <ul>
                     <li class="item" v-for="selectedFood in selectedFoods">
                         <span class="left">
@@ -53,6 +53,7 @@
 <script>
     import {transform} from "@/util/transform.js"
     import contorl from "components/ele-contorl/ele-contorl.vue"
+    import BScroll from "better-scroll";
     export default {
         name: "ele-cart",
         props:{
@@ -96,17 +97,59 @@
                     return "去结算"
                 }
             },
+            /*
+                list的隐藏与显示 是由两个因素来控制!!!
+                    1. 用户是否点击了购物车
+                        抽象出来一个数据:flod(折叠!!!)
+                    2. 购物车当中是否有数据
+                        totalCount
+
+                list的显示与隐藏 与 flod数据应该是相反的
+                    flod:true 折叠   showList:false
+                    flod:false 未折叠   showList:true
+
+                正常操作:
+                    先点+号按钮; 购物车中加入了数据
+                    用户想看购物车详情, 点击购物车出现列表
+
+                细节1:
+                    有没有可能用户先点击购物车;让flod状态变为了false(未折叠)
+                    又点击了+号 导致列表无缘无故的打开
+
+                    怎么解决:
+                        在购物车中没有数据的时候 flod状态也不能产生改变
+
+                细节2:
+                    正常操作;打开了列表.  所以flod=false;
+                    我们通过清空购物车导致totalcount为0;列表关闭!!!
+                    可是flod仍然为false 状态不对!!!! 应该为true
+
+                    怎么解决:
+                        当totalCount<=0 时;flod一定得是true的
+             */
             showList(){
                 //代表控制list的显示与隐藏
                 //1. 购物车中的数量大于0
                 //2. flod要为false
                 //满足 1 和 2 list才能显示
-                if(this.totalCount<=0){
-                    //逻辑一定要填满;当 购物车中的数量小于等于0是;flod一定是true的
-                    //flod代表着折叠
+                if(this.totalCount <= 0){
+                    //哪怕在这写的这段代码没有作用!!! 我也会写!!!
+                    //任何情况下,购物车数据都小于等于0了 我将折叠设为true 是永远都不会出问题的!!!
                     this.flod = true;
                     return false
                 }
+
+                //让list产生滑屏
+                this.$nextTick(()=>{
+                    if(!this.scroll){
+                        this.scroll = new BScroll(this.$refs.listContent,{
+                            click:true
+                        })
+                    }else {
+                        this.scroll.refresh()
+                    }
+                })
+
                 return !this.flod
             }
         },
@@ -190,7 +233,7 @@
             },
             flodFn(){
                 if(this.totalCount <=0){
-                    return;
+                    return ;
                 }
                 this.flod=!this.flod
             }
@@ -202,6 +245,14 @@
                 this.dropBall(target)
             })
 
+            //让列表产生滑屏
+            //在当前这个钩子中 能确保界面渲染完成吗? 不能!!!
+            /*this.$nextTick(()=>{
+                debugger
+                new BScroll(this.$refs.listContent,{
+                    click:true
+                })
+            })*/
         },
         components:{
             "ele-contorl":contorl
@@ -338,6 +389,8 @@
                 font-size 14px
 
         .content
+            height 195px
+            overflow hidden
             .item
                 one-px(rgba(7,17,27,.1))
                 display flex
