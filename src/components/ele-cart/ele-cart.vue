@@ -18,7 +18,12 @@
             <span v-if="rightText">{{rightText}}</span>
         </div>
         <div class="balls">
-            <i class="ball" v-for="ball in balls" v-show="ball.show"></i>
+            <transition v-for="ball in balls"
+                    @before-enter="beforeEnter"
+                    @enter="enter"
+                    @after-enter="afterEnter">
+                <i class="ball" v-show="ball.show"></i>
+            </transition>
         </div>
     </div>
 </template>
@@ -67,15 +72,52 @@
             }
         },
         methods:{
-            dropBall(){
-                console.log("dropBall")
-            }
+            dropBall(target){
+                /*
+                * 实现小球动画
+                *   1. 每一次点击 从小球数组中挑出一个不在运动的小球
+                *          运动中的小球 : show:true
+                *          不在运动中的小球: show:false
+                *   2. 确定小球的起始位置
+                *   3. 进行动画
+                *   4. 动画收尾
+                * */
+                for(let i=0;i<this.balls.length;i++){
+                    let ball = this.balls[i];
+                    if(!ball.show){
+                        //此处 我们改变了show的值 会触发vue的动画逻辑
+                        ball.show = true;
+                        // 为了待会beforeEnter中可以读到target信息
+                        // 函数与函数之间进行数据的传递 大概率下会使用到对象的属性
+                        ball.target = target;
+                        return;
+                    }
+                };
+            },
+            // 钩子 hooks   Enter  隐藏--> 显示的会调用下面三个钩子
+            //  beforeEnter:动画第一帧
+            //  enter:开始动画
+            //  afterEnter:动画结束
+            beforeEnter(){
+                //动画第一帧 :  确定最新要运动的小球起始位置
+                let count = this.balls.length;
+                while (count--){
+                    let ball = this.balls[count];
+                    if(ball.show){
+                        //当前这个小球 结束即将要产生运动的小球
+                        //确定这个小球的初始位置
+
+                    }
+                }
+            },
+            enter(){console.log("enter")},
+            afterEnter(){console.log("afterEnter")}
         },
         mounted(){
             //唤醒一个小球
-            this.bus.$on("ballsAmination",()=>{
+            this.bus.$on("ballsAmination",(target)=>{
                 //实现整个小球动画
-                this.dropBall()
+                this.dropBall(target)
             })
 
         }
@@ -170,6 +212,7 @@
                 height 16px
                 border-radius 50%
                 background deeppink
+                transition 1s transform linear
 
 
 </style>

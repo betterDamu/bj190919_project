@@ -18,10 +18,11 @@
             food:Object
         },
         methods:{
-            addCount(){
+            addCount(ev){
                 this.bus.$emit("addCount",this.food);
                 //跟ele-cart组件进行一次交互 唤醒一个小球
-                this.bus.$emit("ballsAmination")
+                //ev.target: 触发当前click事件的dom元素
+                this.bus.$emit("ballsAmination",ev.target)
             },
             removeCount(){
                 this.bus.$emit("removeCount",this.food)
