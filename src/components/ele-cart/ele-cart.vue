@@ -17,6 +17,9 @@
         <div class="right" :class="{active:totalPrice>=seller.minPrice}">
             <span v-if="rightText">{{rightText}}</span>
         </div>
+        <div class="balls">
+            <i class="ball" v-for="ball in balls" v-show="ball.show"></i>
+        </div>
     </div>
 </template>
 
@@ -26,6 +29,17 @@
         props:{
             selectedFoods:Array,
             seller:Object
+        },
+        data(){
+          return {
+              balls:[
+                  {show:false},
+                  {show:false},
+                  {show:false},
+                  {show:false},
+                  {show:false}
+              ]
+          }
         },
         computed:{
             totalCount(){
@@ -51,6 +65,19 @@
                     return "去结算"
                 }
             }
+        },
+        methods:{
+            dropBall(){
+                console.log("dropBall")
+            }
+        },
+        mounted(){
+            //唤醒一个小球
+            this.bus.$on("ballsAmination",()=>{
+                //实现整个小球动画
+                this.dropBall()
+            })
+
         }
     }
 </script>
@@ -134,4 +161,15 @@
                     color white
             span
                 color rgba(255,255,255,0.6)
+        .balls
+            .ball
+                position absolute
+                left 31px
+                top 5px
+                width 16px
+                height 16px
+                border-radius 50%
+                background deeppink
+
+
 </style>

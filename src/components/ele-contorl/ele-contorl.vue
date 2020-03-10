@@ -7,7 +7,7 @@
         <transition name="contorlRemove">
             <span v-show="food.count>0">{{food.count}}</span>
         </transition>
-        <i class="icon-add_circle" @click="addCount"  ></i>
+        <i class="icon-add_circle add" @click="addCount"   ></i>
     </div>
 </template>
 
@@ -19,7 +19,9 @@
         },
         methods:{
             addCount(){
-                this.bus.$emit("addCount",this.food)
+                this.bus.$emit("addCount",this.food);
+                //跟ele-cart组件进行一次交互 唤醒一个小球
+                this.bus.$emit("ballsAmination")
             },
             removeCount(){
                 this.bus.$emit("removeCount",this.food)
@@ -38,6 +40,9 @@
             font-size 24px
             vertical-align middle
             color rgba(0,160,220,1)
+            &.add
+                position relative
+                z-index: 1
             &.remove
                 opacity 1
                 transform translate3d(0,0,0) rotate(-720deg)
