@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var a = new Array( 3 );
+		var b = [ undefined, undefined, undefined ];
+		var c = [];
+		c.length = 3;
+
+
+		// join:将数组内的元素 按指定的字符串 连接起来
+		console.log(a.join( "-" )); // "--"
+		console.log(b.join( "-" )); // "--"
+		console.log(c.join( "-" )); // "--"
+
+		//很多的数组api是不支持稀疏数组!!!!
+		a.map(function(v,i){ console.log(v,i,"a")});//无输出
+		b.map(function(v,i){ console.log(v,i,"b")});//有输出
+		c.map(function(v,i){ console.log(v,i),"c"});//无输出
+
+
+		//稀疏数组   切記！！！在实际开发时!! 一定不能定义出稀疏数组
+		//如果发现 调用数组的api 没有达到你的预期 首先检查一下 你是不是定义处理稀疏数组
+		var d = [1,2,3,4]
+		d[10] = 11;
+		console.log(d)
+	</script>
+</html>

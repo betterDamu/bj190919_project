@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+	</body>
+	<script type="text/javascript">
+		/*
+			什么是伪数组?
+				具有length 并且使用下标作为属性的 对象(object)
+
+			伪数组有什么伤害?
+				伪数组无公害;可是伪数组是没有办法使用到数组的api的
+
+			常见的伪数组:
+				HTMLCollection
+				NodeList
+				arguments
+		*/
+		var arr ={};
+		arr.length=3;
+		arr[0]=0;
+		arr[1]=1;
+		arr[2]=2;
+		
+		
+		var arr2 = Array.prototype.slice.call( arr );
+		arr2.push(3)
+		console.log(arr2);
+
+		// const divNodes = document.getElementsByTagName("div");
+		const divNodes = document.querySelectorAll("div");
+		console.log(divNodes)
+	</script>
+</html>
