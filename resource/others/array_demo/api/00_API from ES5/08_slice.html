@@ -7,19 +7,26 @@
 	<body>
 	</body>
 	<script type="text/javascript">
-		//slice() 方法返回一个从开始到结束（不包括结束，左闭右开）选择的数组的一部分浅拷贝到一个新数组对象
+		//slice() 方法返回一个从开始到结束（不包括结束，左闭右开）
+		// 选择的数组的一部分浅拷贝到一个新数组对象
+
+		//语法: slice(begin,end):[begin,end)
+        //参数
+        /*
+            begin 可选
+            end
+        */
+        //返回值：一个含有提取元素的新数组
+
+        //是否影响老数组：不影响
+
+
+		//以后再js的api中遇到区间  那一定是 左闭右开!!!
 		var arr =[1,25,34,14,26,16,47,28];
-		arr.slice(2, 6);
-		//参数
-			/*
-				begin 可选
-				end   
-				slice(begin,end):[begin,end)
-			*/
-			
-		//返回值：一个含有提取元素的新数组
-		
-		//是否影响老数组：不影响
+		var res = arr.slice(2, 6);
+
+		console.log(arr,res,res===arr)
+
 		
 		
 		

@@ -8,10 +8,30 @@
 	</body>
 	<script type="text/javascript">
 
-		var arr =["a","b","c"];
-		arr.forEach(function(item,index){
-			console.log(item,index,this);
-		},{name:"damu"})
+		/*定时器函数是被同步调用的!!!
+			调用完会将 定时器的第一个参数(函数塞到一个容器(宏队列)中进行保存)*/
+		/*setTimeout(()=>{
+            console.log("++++")
+		})
+		console.log("----")*/
+
+		/*
+			1. 函数是不是你调用的?  不是
+            2. 函数有没有执行?   执行了
+            ---> 说明这个函数是一个浏览器的回调函数
+
+        一般情况下!!!
+            在js中 回调函数应该都是异步的!!!!
+            可是 数组api的绝大部分回调函数都是同步!!!
+        */
+
+        //隐式迭代!!!  循环是浏览器内部做的!!
+        var arr =["a","b","c"];
+        //R！！！！！！！
+        var res = arr.forEach((item,index,arr)=>{
+            console.log(item,index,arr,this)
+        },{a:"a"})
+		console.log(res,"返回值",arr)
 
         //forEach() 方法对数组的每个元素执行一次提供的函数。
 		//参数1:callback
@@ -26,6 +46,8 @@
 		
 		//返回值：undefined
 		
-		//是否影响老数组：由callback决定
+		/*是否影响老数组：由callback决定
+			foreach是用来做遍历的!! 说白了就是一个查询操作
+		切记不要在foreach内部 对数组进行CUD操作！！！！*/
 	</script>
 </html>
