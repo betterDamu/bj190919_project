@@ -389,7 +389,7 @@
                 font-size 14px
 
         .content
-            height 195px
+            max-height 195px
             overflow hidden
             .item
                 one-px(rgba(7,17,27,.1))
