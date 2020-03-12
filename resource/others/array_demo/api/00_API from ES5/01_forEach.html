@@ -29,9 +29,12 @@
         var arr =["a","b","c"];
         //R！！！！！！！
         var res = arr.forEach((item,index,arr)=>{
-            console.log(item,index,arr,this)
+            //可以U操作
+            //arr[index] = arr[index]+"-"
+            item = item+"-"
         },{a:"a"})
-		console.log(res,"返回值",arr)
+
+		console.log(arr)
 
         //forEach() 方法对数组的每个元素执行一次提供的函数。
 		//参数1:callback
@@ -48,6 +51,6 @@
 		
 		/*是否影响老数组：由callback决定
 			foreach是用来做遍历的!! 说白了就是一个查询操作
-		切记不要在foreach内部 对数组进行CUD操作！！！！*/
+		切记不要在foreach内部 对数组进行CD操作！！！！*/
 	</script>
 </html>
