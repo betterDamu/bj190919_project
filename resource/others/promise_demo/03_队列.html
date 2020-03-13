@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+
+    // function setTimeout(fn){
+    //
+    // }
+
+
+    /*
+        setTimeout被执行完之后;定时器的回调会立马被塞进
+    队列嘛?
+
+        只有异步的回调 才需要放到队列中!!!!
+        同步的回调 是直接执行的!!!!!
+    */
+
+    // js引擎 v8: 执行定时器函数 但不对回调进行执行 只对回调进行注册(异步线程持有者回调)
+    // v8引擎是单线程的 一个时刻只能做一件事情!!!
+    // 浏览器是多线程的!!!!   v8引擎只是浏览器中一个核心线程
+    setTimeout(()=>{
+        console.log("------")
+    },2000)
+
+
+    // while (true){
+    //
+    // }
+
+</script>
+</html>
