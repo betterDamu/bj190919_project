@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    /*    1. 什么是Promise
+            Promise是一种管理回调函数的机制
+            本质上来讲;Promise就是一个函数!!
+
+          2.Promise的参数
+                executor 执行器是一个同步的回调函数!!!!!
+                    执行器的参数
+                        executor 执行器有两个参数!!!: resolve;reject
+                        resolve;reject 有能力改变promise的状态!!!!
+                    执行器的返回值
+                        executor 执行器的返回值是被忽略的
+
+          3.Promise的返回值
+            new Promise --> promise实例
+    */
+
+
+    /*
+        new Promise 返回的promise 它状态的确定!!
+            只能通过执行器来确定!!!
+                如果执行器函数的第一个参数被调用!!! 那么promise会变成成功状态
+                如果执行器函数的第二个参数被调用!!! 那么promise会变成失败状态
+                如果执行器内部调用时 抛出异常!!!! 那么promise会变成失败状态
+
+        promise的状态改变有什么用?
+            当promise对象的状态发生改变时，绑定在其身上的then方法中的两个参数会被选择性的调用一个
+            then方法的参数:
+                两个函数
+            then方法的返回值:
+                then方法返回的也是一个promise!!!
+    */
+
+    /*
+        promise的状态机制:
+            new Promise 返回的promise 它的状态是怎么确定的?
+                只能通过执行器来确定!!!
+                如果执行器函数的第一个参数被调用!!! 那么promise会变成成功状态
+                如果执行器函数的第二个参数被调用!!! 那么promise会变成失败状态
+                如果执行器内部调用时 抛出异常!!!! 那么promise会变成失败状态
+
+
+            then方法返回的promise  它的状态是怎么确定的?
+                then方法返回一个新的Promise，而它状态的确定与then中的回调函数的返回值有关
+                    如果then中的回调函数返回一个值，那么then返回的Promise将会成为接受状态
+                    如果then中的回调函数抛出一个错误，那么then返回的Promise将会成为拒绝状态
+                    如果then中的回调函数返回一个promise，那么then返回的Promise和当前这个promise保持一样的状态!!!
+
+    */
+
+
+
+    var promise = new Promise((resolve,reject)=>{
+        //setTimeout是被同步调用的!!!!
+        setTimeout(()=>{  //定时器的回调才是异步回调
+            resolve()
+        },2000)
+    })
+
+
+   /* 这个then方法 是同步调用的? 还是异步调用的?
+        then方法永远都是同步调用的!!!!
+
+   */
+
+
+    // promise.then(()=>{console.log("then-1-s")})
+    //        .then(()=>{console.log("then-2-s")})
+    //        .then(()=>{console.log("then-3-s")})
+    //        .then(()=>{console.log("then-4-s")})
+    //        .then(()=>{console.log("then-5-s")})
+    //        .then(()=>{console.log("then-6-s")})
+    //        // .then(()=>{},()=>{console.log("错误")})
+    //        .catch(()=>{console.log("错误")})
+
+
+    promise.then(()=>{
+                return new Promise((resolve,reject)=>{
+                    setTimeout(()=>{
+                        resolve()
+                    },2000)
+                })
+            })
+           .then(()=>{console.log("then-2-s")})
+
+
+</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    (async function(){
+        //async 函数执行的结果是返回一个promise
+        //如果async 函数执行成功 返回一个成功状态的promise
+        //如果async 函数执行失败 或 主动的返回了一个失败状态的promise 则返回一个失败状态的promise
+        async function test(){
+            await new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    console.log("setTimeout")
+                    resolve()
+                },2000)
+            })
+            console.log("+++++")
+        }
+
+        //await 是用来等待一个promise确定状态
+        await test();
+        console.log("-----")
+    })()
+</script>
+</html>

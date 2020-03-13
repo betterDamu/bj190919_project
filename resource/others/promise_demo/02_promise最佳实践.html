@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*1. 执行器里一定是对异步逻辑的处理!!!!
+            如果说你在执行器中 进行一些同步逻辑的处理 那就是在瞎用promise
+            new Promise 返回的promise的状态一定得是异步决定的!!!
+
+      2. then方法的回调参数中应该要返回一个promise!!!
+            如果说你在then方法的回调中 返回的不是一篇promise 那你也是在瞎用!!!
+
+    */
+
+
+    // setTimeout队列:[]
+            //  setTimeout1没有被立马塞进setTimeout队列 而是等了2s之后才被塞进了队列!!!!
+            //  setTimeout2没有被立马塞进setTimeout队列 而是等了2s之后才被塞进了队列!!!!
+            //  setTimeout3没有被立马塞进setTimeout队列 而是等了2s之后才被塞进了队列!!!!
+            //  setTimeout4没有被立马塞进setTimeout队列 而是等了2s之后才被塞进了队列!!!!
+            //
+    // then:队列:[]       then1,then2,then3
+    var promise = new Promise((resolve,reject)=>{
+        //setTimeout是被同步调用的!!!!
+        setTimeout(()=>{  //定时器的回调才是异步回调
+            console.log(1)
+            resolve()
+        },2000)
+    })
+
+
+    promise.then(()=>{
+        return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                console.log(2)
+                resolve()
+            },2000)
+        })
+    }).then(()=>{
+        return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                console.log(3)
+                resolve()
+            },2000)
+        })
+    }).then(()=>{
+        return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                console.log(4)
+                resolve()
+            },2000)
+        })
+    })
+
+
+
+
+
+
+
+
+</script>
+</html>
