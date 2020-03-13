@@ -13,12 +13,39 @@
     //     console.log("----")
     // })
 
+    /*
+
+        async function test() {
+            await promise
+            console.log("1") //await下面的代码
+        }
+            await下面的代码:
+                promise.then(()=>{
+                    await下面的代码
+                })
+
+
+        async function test() {
+            await 123
+            console.log("1") // await下面的代码
+        }
+            await下面的代码:
+                Promise.reslove(123).then(()=>{
+                    await下面的代码
+                })
+    */
+
+
+
+
+
     async function test() {
         await new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 console.log("setTimeout")
             });
         })
+        // await 下面的代码
         console.log("1")
     }
 
