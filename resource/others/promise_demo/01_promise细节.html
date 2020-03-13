@@ -63,7 +63,7 @@
     var promise = new Promise((resolve,reject)=>{
         //setTimeout是被同步调用的!!!!
         setTimeout(()=>{  //定时器的回调才是异步回调
-            resolve()
+            resolve(1)
         },2000)
     })
 
@@ -84,7 +84,8 @@
     //        .catch(()=>{console.log("错误")})
 
 
-    promise.then(()=>{
+    promise.then((val)=>{
+                console.log(val)
                 return new Promise((resolve,reject)=>{
                     setTimeout(()=>{
                         resolve()
@@ -93,6 +94,7 @@
             })
            .then(()=>{console.log("then-2-s")})
 
+    console.log(promise)
 
 </script>
 </html>

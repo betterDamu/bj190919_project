@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    // promise.then(()=>{
+    //     console.log("----")
+    // })
+
+    async function test() {
+        await new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log("setTimeout")
+            });
+        })
+        console.log("1")
+    }
+
+
+    test()
+    console.log("2")
+
+</script>
+</html>
