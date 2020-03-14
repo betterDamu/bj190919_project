@@ -25,10 +25,10 @@
         小球动画 购物车的列表
 
 ### layout项目不足的地方
-    vue-router (只使用了普通路由)
     axios(没有封装)
         结合vue的移动端UI框架(vant)
     vuex(没有使用)
+    vue-router (只使用了普通路由)
 
 ### layout项目的优势
     完整的移动端实战布局
