@@ -39,7 +39,7 @@
 
 
 
-    async function test() {
+    /*async function test() {
         await new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 console.log("setTimeout")
@@ -51,7 +51,11 @@
 
 
     test()
-    console.log("2")
+    console.log("2")*/
 
+    async function test() {
+        return 1;
+    }
+    console.log(test())
 </script>
 </html>
