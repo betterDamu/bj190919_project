@@ -21,7 +21,7 @@ app.use(express.static('public'))
 // 请求体参数是: name=tom&pwd=123 (pre代码使用)
 // app.use(express.urlencoded({extended: true}))
 // 请求体参数是json结构: {name: tom, pwd: 123} (work代码使用)
-app.use(express.json())
+app.use(express.json()) //post请求的数据应该要通过json的格式发到后台
 
 // 声明使用解析cookie数据的中间件
 const cookieParser = require('cookie-parser')

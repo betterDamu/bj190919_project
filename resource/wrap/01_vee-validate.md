@@ -19,7 +19,7 @@
      
      const success = await this.$validator.validateAll() // 对所有表单项进行验证
      const success = await this.$validator.validateAll(names) // 对指定的所有表单项进行验证
-     
+            names:[]
      问题: 提示文本默认都是英文的
 
 ## 3). 提示信息本地化

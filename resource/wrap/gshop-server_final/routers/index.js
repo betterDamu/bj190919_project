@@ -21,7 +21,7 @@ router.post('/login_pwd', function (req, res) {
   const name = req.body.name
   const pwd = md5(req.body.pwd)
   const captcha = req.body.captcha.toLowerCase()
-  // console.log('/login_pwd', name, pwd, captcha)
+
 
   // 可以对用户名/密码格式进行检查, 如果非法, 返回提示信息
   if (captcha !== req.session.captcha) {
