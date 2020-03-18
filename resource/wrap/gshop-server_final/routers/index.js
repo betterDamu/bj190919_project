@@ -146,7 +146,14 @@ router.get('/auto_login', function(req, res) {
   // 得到请求头中的token
   const token = req.headers['authorization']
   // 如果请求头中没有token, 直接返回  token=="null"
-  if (token === "null" || token === "undefined" || token==="") {
+  // 如果前端传的token是一个 null 其实到了后台都长这样 "[Object object]"
+  // 如果前端传的token是一个 undefined 其实到了后台都长这样 "undefined" 如果是postman测试的 (undefined 就是 undefined类型)
+  // 在前端 如果没有token 你应该传一个""
+  // token是经过http协议过来 在http协议中是没有数据类型这个概念的!!!  只传字符串!!!
+  // 即支持ajax请求  又支持postman来进行测试
+  // if(token === "null" || token === "undefined)
+  console.log(token,typeof token)
+  if (token==="" || token===undefined) {
     return res.send({code: 1, msg: '请先登陆'})
   }
 
@@ -178,8 +185,8 @@ router.get('/position/:geohash', function(req, res) {
 /*
 获取首页分类列表
  */
-// router.get('/index_category', checkToken, function(req, res) {
-router.get('/index_category', function(req, res) {
+router.get('/index_category', checkToken, function(req, res) {
+// router.get('/index_category', function(req, res) {
   setTimeout(function () {
     const data = require('../data/index_category.json')
     res.send({code: 0, data})
@@ -189,8 +196,8 @@ router.get('/index_category', function(req, res) {
 /*
 根据经纬度获取商铺列表
  */
-// router.get('/shops', checkToken, function(req, res) {
-router.get('/shops', function(req, res) {
+router.get('/shops', checkToken, function(req, res) {
+// router.get('/shops', function(req, res) {
   setTimeout(function () {
     const data = require('../data/shops.json')
     res.send({code: 0, data})
