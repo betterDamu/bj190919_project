@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //经典的闭包!!!!
+
+    /*
+        wrap的作用域
+        []
+
+        wrap给inner的闭包:
+            {a:a}
+
+        inner的作用域
+        [{}]
+   */
+
+    function wrap() {
+       const  a = "a";
+       function inner() {
+          console.log(a)
+       }
+       return inner;
+    }
+
+    var inner = wrap()
+    inner()
+
+</script>
+</html>

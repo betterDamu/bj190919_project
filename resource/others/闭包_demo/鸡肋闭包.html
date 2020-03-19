@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //内部函数使用了外部函数的变量  就会产生闭包
+
+    //函数调用一次 产生一个执行上下文 在浏览器内部 执行上下文就是一个存储数据的c++对象
+
+    //执行上下文 都是会绑给 对应的作用域的  在浏览器内部  作用域本质也是一个 c++对象
+
+
+    //作用域&作用域链  设计出来是为了解决变量的查找问题
+    //作用域中处于活动状态的执行上下文 一个时间点只会有一个
+    function wrap() {
+        const a = "a";
+        //因为内部函数 使用了外部函数的变量  浏览器引擎发现后 会创建出另外一个c++对象
+        // 闭包 : {a:"a"}
+        function inner() {
+            console.log(a)
+        }
+
+        // 问?  此时wrap有没有调用结束   没有
+        // 创建出一个inner的执行上下文 {} 放入 inner的作用域 [{}]
+        inner()
+    }
+
+    wrap()  //创建出一个wrap的执行上下文  放入wrap的作用域中  [{a:"a"}]
+
+</script>
+</html>

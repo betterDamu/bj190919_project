@@ -46,7 +46,8 @@ app.get('/test', function (req, res) {
   })
 })
 
-// 在路由器中间之后, 处理所有与路由器中间的路由不匹配的请求
+// 在路由器中间之后, 处理所有与路由器中间件的路由不匹配的请求
+// 所有的404 请求都会返回我们的index.html
 app.use((req, res) => {
   fs.readFile(__dirname + '/public/index.html', (err, data)=>{
     if(err){

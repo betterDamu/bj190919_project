@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*将闭包的概念!!! 与异步编程相结合
+        在任何一门靠异步活着的语言中 没有闭包是不可能的!!!!!*/
+
+    /*wrap作用域 : []
+    inner作用域: [] ; 注册了定时器(wrap已经给这个定时器的回调 留了闭包了)
+
+    v8引擎执行完 wrap后 没事干了
+
+    wrap的执行上下文在死之前 给 定时器的回调留下了一个闭包 {a:"a"}
+    循环队列 取出定时器的回调进行调用
+        定时器回调的作用域 [{}]*/
+
+    // 在js中 大部分的闭包 都出现在异步逻辑中!!!!
+
+
+    //什么是闭包?  当函数有能力记住并访问自己的作用域链时 就会产生闭包!!!
+
+
+    function wrap() {
+       const  a = "a";
+       function inner() {
+          setTimeout(()=>{
+              console.log(a)
+          })
+       }
+       inner()
+    }
+
+   wrap()
+
+</script>
+</html>

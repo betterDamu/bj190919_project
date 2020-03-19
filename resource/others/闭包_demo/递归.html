@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //函数调用一次 产生一个执行上下文 在浏览器内部 执行上下文就是一个存储数据的c++对象
+    //执行上下文 都是会绑给 对应的作用域的  在浏览器内部  作用域本质也是一个 c++对象
+
+    // wrap的作用域  [{a:"a"},{a:"a"}.....]
+
+    function wrap() {
+        const a = "a";
+        wrap()
+    }
+
+    wrap()  //创建出一个wrap的执行上下文   {a:"a"}
+
+</script>
+</html>
