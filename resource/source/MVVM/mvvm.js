@@ -14,6 +14,7 @@ function MVVM(options) {
         me._proxy(key);
     });
 
+    //数据劫持  data:放数据的配置对象  this:vm
     observe(data, this);
 
     this.$compile = new Compile(options.el || document.body, this)

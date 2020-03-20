@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        1. 数据代理
+        2. 数据劫持
+        3. 指令解析
+    -->
+</head>
+<body>
+    <div id="app">
+        {{a}}
+    </div>
+</body>
+<script src="./MVVM/mvvm.js"></script>
+<script src="./MVVM/observer.js"></script>
+<script src="./MVVM/compile.js"></script>
+<script src="./MVVM/watcher.js"></script>
+<script>
+   /* 数据劫持时做了两件重要的事情:
+        1. 为data中的每一个属性 分配dep
+        2. 为data中的每一个属性 加上set和get方法*/
+
+
+    /*数据劫持:
+        就是把data中的所有属性(深度遍历) 拿出来重新定义一把;为他们加上get set方法*/
+    /*数据劫持执行的顺序:
+       1. damuname --> damuage --> sonname --> sonage -->wifename --> wifeage
+               --> sonwife --> damuson  --> damu --> a --> b --> data*/
+
+
+
+
+    /*每一个data中的属性 在被做数据劫持时; 都会分配到一个dep闭包
+        dep的id是不一样的!! 每次都是累加的!!!*/
+
+    /*dep的分配顺序:
+       1. damu --> damuname --> damuage --> damuson --> sonname
+            --> sonage --> sonwife -->  wifename --> wifeage
+            -->a --> b
+    */
+    var vm = new MVVM({
+        el:"#app",
+        data:{
+            damu:{
+                damuname:"达姆",
+                damuage:18,
+                damuson:{
+                    sonname:"思聪",
+                    sonage:8,
+                    sonwife:{
+                        wifename:"凤姐",
+                        wifeage:8
+                    }
+                }
+            },
+            a:"a",
+            b:"b"
+        }
+    })
+</script>
+</html>
