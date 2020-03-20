@@ -17,6 +17,7 @@ function MVVM(options) {
     //数据劫持  data:放数据的配置对象  this:vm
     observe(data, this);
 
+    //指令解析
     this.$compile = new Compile(options.el || document.body, this)
 }
 

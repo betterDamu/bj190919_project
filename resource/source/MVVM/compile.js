@@ -1,10 +1,15 @@
+//el:根节点的选择器  vm:new MVVM()
 function Compile(el, vm) {
+    //this : Compile的实例对象  匿名对象
     this.$vm = vm;
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
 
     if (this.$el) {
+        // el底下的所有子节点都会被剪切到文档碎片中
         this.$fragment = this.node2Fragment(this.$el);
+        //模板解析工作
         this.init();
+        //经过init 后将解析完的所有子节点 统一挂回到el上
         this.$el.appendChild(this.$fragment);
     }
 }
@@ -26,13 +31,14 @@ Compile.prototype = {
     },
 
     compileElement: function(el) {
+        // childNodes : 代表一个元素的所有子节点 包括文本节点
         var childNodes = el.childNodes,
             me = this;
 
         //Array.prototype.slice.call(childNodes)
         [].slice.call(childNodes).forEach(function(node) {
             var text = node.textContent;
-            var reg = /\{\{(.*)\}\}/;
+            var reg = /\{\{(.*)\}\}/; //在正则中如果出现() 代表的是分组 对正则的匹配没有任何影响
 
             if (me.isElementNode(node)) {
                 me.compile(node);
@@ -83,15 +89,15 @@ Compile.prototype = {
     },
 
     isElementNode: function(node) {
-        return node.nodeType == 1;
+        return node.nodeType == 1;//元素节点
     },
 
     isTextNode: function(node) {
-        return node.nodeType == 3;
+        return node.nodeType == 3;//文本节点
     }
 };
 
-// 指令处理集合
+// 指令解析的工具类
 var compileUtil = {
     text: function(node, vm, exp) {
         this.bind(node, vm, exp, 'text');
@@ -140,6 +146,7 @@ var compileUtil = {
         }
     },
 
+    //根据exp 去 vm的data的配置中 找exp对应的数据!!!
     _getVMVal: function(vm, exp) {
         var val = vm._data;
         exp = exp.split('.');
@@ -163,7 +170,7 @@ var compileUtil = {
     }
 };
 
-
+//指令解析的更新器
 var updater = {
     textUpdater: function(node, value) {
         node.textContent = typeof value == 'undefined' ? '' : value;
