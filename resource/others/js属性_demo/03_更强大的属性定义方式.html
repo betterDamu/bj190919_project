@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var obj ={
+        name:"damu",
+        age:18
+    }
+    console.log(Object.getOwnPropertyDescriptor(obj,"name"))
+
+    //可以为对象新增属性
+    Object.defineProperty(obj,"wife",{
+        value:"zdy",
+        writable:false,
+        enumerable:false,
+        configurable:false
+    })
+
+    //还可以为对象去重新定义属性
+    Object.defineProperty(obj,"name",{
+        value:"达姆",
+        writable:false,
+        enumerable:false,
+        configurable:false
+    })
+    console.log(Object.getOwnPropertyDescriptor(obj,"name"))
+
+
+    console.log(obj);
+
+    for (let key in obj){
+        console.log(key,"for in")
+    }
+
+    delete obj.wife;
+    delete obj.age;
+    obj.wife = "天禹"
+    console.log(obj);
+</script>
+</html>

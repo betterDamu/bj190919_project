@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+   var obj = {};
+
+
+   Object.defineProperty(obj,"age",{
+       get:function(){
+            return this.__age__;
+       },
+       set:function (val) {
+           console.log("set");
+           this.__age__ = val;
+       },
+       configurable:true,
+       enumerable:true
+   })
+
+   obj.age = 1;
+   console.log(obj);
+
+
+</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var obj = {
+        name:"damu"
+    }
+
+    //如何获取一个属性的元属性
+    var info = Object.getOwnPropertyDescriptor(obj,"name");
+    console.log(info);
+
+
+    // 属性描述符
+   /* {
+        value: "damu"        //属性的值
+        writable: true       //属性是否可写
+        enumerable: true     //属性是否可枚举(枚举:代表属性能不能出现在对象的for in循环中)
+        configurable: true   //属性是否可配置(能不能重新定义  能不能被删除)
+    }*/
+
+    obj.name="达姆"
+    console.log(obj);
+
+    for(let key in obj){
+        console.log(key,"key")
+    }
+
+    delete obj.name
+    console.log(obj);
+</script>
+</html>

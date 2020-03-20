@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //为obj新增了一个属性 属性名叫age
+    //我们可以控制属性值的获取 与 设置
+    var obj ={
+        name:"obj",
+        //同步的回调函数   age属性不被获取  永远不会调用
+        //this : 当前对象
+        get age(){
+            console.log("获取age属性",this)
+            return this.__age__;
+        },
+        //同步的回调函数  age属性不被设置 永远不会调用
+        //this : 当前对象
+        set age(val){
+            //val : 给age设置的值
+            console.log("设置age属性",val,this)
+            this.__age__ = val
+        }
+    }
+
+    obj.age = 20
+    console.log(obj);
+
+
+</script>
+</html>

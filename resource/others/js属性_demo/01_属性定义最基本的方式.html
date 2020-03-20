@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //字面量的形式    这是一种语法糖  : 为了让开发者可以高效快速的定义属性
+    var obj ={
+        name:"damu"
+    }
+    obj.age = 18;
+
+    //另外一种更强大的属性定义形式
+    //元属性  属性描述符;  用来修饰对象的属性的: 值为多少 是否只读 是否可枚举 是否可配置
+    Object.defineProperty(obj,"wife",{
+        value:"zdy"
+    })
+
+    console.log(obj)
+</script>
+</html>
