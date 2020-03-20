@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        1. 数据代理
+        2. 数据劫持
+        3. 指令解析
+    -->
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+    </div>
+</body>
+<script src="./MVVM/mvvm.js"></script>
+<script src="./MVVM/observer.js"></script>
+<script src="./MVVM/compile.js"></script>
+<script src="./MVVM/watcher.js"></script>
+<script>
+    var vm = new MVVM({
+        el:"#app",
+        data:{
+            msg:"hello mvvm",
+            a:"a",
+            b:"b",
+            c:"c",
+            d:"d",
+            e:"e"
+        }
+    })
+    //数据代理 : 配置对象中的属性 会 转绑给 vm实例对象
+    console.log(vm.msg)  //data.msg
+
+
+
+    //数据代理: 将data配置对象中属性的名字一个个拿出来  给vm实例对象绑上一模一样名字的属性
+    //可是对vm实例对象的属性发起访问 和 修改  最终得到或操作的都是data配置对象中的属性
+    /*    Object.defineProperty(vm,"msg",{
+            get: function proxyGetter() {
+                return data["msg"];
+            },
+            set: function proxySetter(newVal) {
+                data["msg"] = newVal;
+            }
+        })*/
+</script>
+</html>
