@@ -71,6 +71,7 @@ Dep.prototype = {
 
     depend: function() {
         Dep.target.addDep(this);
+        //watcher.addDep(this)
     },
 
     removeSub: function(sub) {

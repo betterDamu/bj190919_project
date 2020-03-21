@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        在数据劫持的时候 每一个data中的属性都会对应上一个dep闭包
+
+        在指令解析的时候 每一个指令都会在最后一步去new一个wacth
+            watch里面存着对应指令的更新器闭包!!!!
+
+        如果说 dep 和 watch的多对多关系 我们可以使用js构建出来
+            一个dep 对应 着多个watch
+            一个wacth 对应着多个dep
+
+            一个属性对应着多个指令
+                <span v-text="msg" v-html="msg"></span>
+            一个指令对应着多个属性
+                <span v-text="obj.wife.name"></span>
+
+        dep 和 watcher 的多对多关系
+            dep.subs [一个个watcher]
+            wacther.depIds {0:dep,1:dep}
+    -->
+</head>
+<body>
+    <div id="app">
+        <span v-text="obj.wife.name" v-html="obj.wife.name">
+
+        </span>
+        {{obj.wife.name}}
+    </div>
+</body>
+<script src="./MVVM/mvvm.js"></script>
+<script src="./MVVM/observer.js"></script>
+<script src="./MVVM/compile.js"></script>
+<script src="./MVVM/watcher.js"></script>
+<script>
+    var vm = new MVVM({
+        el:"#app",
+        data:{
+           obj:{
+               wife:{
+                   name:"xx"
+               }
+           }
+        }
+    })
+
+    setTimeout(()=>{
+        vm.obj.wife.name = "yy"
+    },2000)
+</script>
+</html>

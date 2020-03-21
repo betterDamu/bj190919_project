@@ -132,6 +132,7 @@ var compileUtil = {
 
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
+        //构建了一个 dep 与 watch 的多对多关系
         new Watcher(vm, exp, function(value, oldValue) {
             updaterFn && updaterFn(node, value, oldValue);
         });
@@ -159,7 +160,6 @@ var compileUtil = {
     _setVMVal: function(vm, exp, value) {
         var val = vm._data;
         exp = exp.split('.');
-        // damu.age  0 1
         exp.forEach(function(k, i) {
             if (i < exp.length - 1) {
                 val = val[k];
